@@ -36,6 +36,7 @@ class _FranjaCulturalState extends State<FranjaCultural> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final fila = Row(mainAxisSize: MainAxisSize.min, children: [
       for (final tema in temas) Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

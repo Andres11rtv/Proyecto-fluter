@@ -105,6 +105,7 @@ class _InicioScreenState extends State<InicioScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Scaffold(
       body: MuseoBackdrop(
         child: SafeArea(
@@ -404,6 +405,7 @@ class _InicioScreenState extends State<InicioScreen> {
   }
 
   List<Color> _heroGradientColors() {
+    if (AppTheme.modo == 'contrast') return List<Color>.filled(4, AppTheme.bg);
     if (AppTheme.modo == 'dark') {
       const base = Color(0xFF0B0E14);
       return [

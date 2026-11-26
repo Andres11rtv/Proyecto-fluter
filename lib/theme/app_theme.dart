@@ -170,6 +170,16 @@ class MuseoBackdrop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
+    return Stack(fit: StackFit.passthrough, children: [
+      Positioned.fill(child: AppTheme.modo == 'light'
+          ? _fondoOriginal(context, const SizedBox.expand())
+          : ColoredBox(key: const ValueKey('fondo-museo-activo'), color: AppTheme.bg)),
+      child,
+    ]);
+  }
+
+  Widget _fondoOriginal(BuildContext context, Widget child) {
     if (AppTheme.modo != 'light') {
       return ColoredBox(color: AppTheme.bg, child: child);
     }
@@ -247,26 +257,29 @@ class HoverCard extends StatefulWidget {
 
 class _HoverCardState extends State<HoverCard> {
   bool _hovered = false;
+  bool _conFoco = false;
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return MouseRegion(
       cursor: widget.onTap != null
           ? SystemMouseCursors.click
           : SystemMouseCursors.basic,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
+      child: InkWell(
+        onFocusChange: (valor) => setState(() => _conFoco = valor),
         onTap: widget.onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 220),
+          duration: MediaQuery.disableAnimationsOf(context) ? Duration.zero : const Duration(milliseconds: 220),
           curve: Curves.easeOutCubic,
           transform: Matrix4.translationValues(0, _hovered ? -4 : 0, 0),
           decoration: BoxDecoration(
             color: (_hovered ? widget.hoverColor : widget.baseColor) ?? AppTheme.surface,
             borderRadius: BorderRadius.circular(widget.borderRadius),
             border: Border.all(
-              color: _hovered ? AppTheme.bronzeBorder : AppTheme.line,
+              color: _conFoco ? AppTheme.bronze : (_hovered ? AppTheme.bronzeBorder : AppTheme.line), width: _conFoco ? 2 : 1,
             ),
             boxShadow: [
               BoxShadow(
@@ -314,6 +327,7 @@ class _MuseoFloatingBarState extends State<MuseoFloatingBar> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         final compacto = constraints.maxWidth < 760;
@@ -325,7 +339,7 @@ class _MuseoFloatingBarState extends State<MuseoFloatingBar> {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 220),
+                duration: MediaQuery.disableAnimationsOf(context) ? Duration.zero : const Duration(milliseconds: 220),
                 padding: EdgeInsets.fromLTRB(compacto ? 16 : 24, 8, compacto ? 12 : 12, 8),
                 decoration: BoxDecoration(
                   color: AppTheme.surface.withValues(alpha: 0.72),
@@ -429,23 +443,27 @@ class _PillTab extends StatefulWidget {
 
 class _PillTabState extends State<_PillTab> {
   bool _hovered = false;
+  bool _conFoco = false;
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _hovered = true),
       onExit: (_) => setState(() => _hovered = false),
-      child: GestureDetector(
+      child: InkWell(
+        onFocusChange: (valor) => setState(() => _conFoco = valor),
         onTap: widget.onTap,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
+          duration: MediaQuery.disableAnimationsOf(context) ? Duration.zero : const Duration(milliseconds: 180),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
           decoration: BoxDecoration(
             color: widget.active
                 ? AppTheme.btn
                 : (_hovered ? AppTheme.surface : Colors.transparent),
             borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: _conFoco ? AppTheme.bronze : Colors.transparent, width: 2),
             boxShadow: widget.active
                 ? [
                     BoxShadow(
@@ -510,4 +528,17 @@ class _Paleta {
     bronzeBorder: Color(0xFFFFEA00), line: Color(0xFFFFEA00),
     head: Color(0xFF1A1A1A), btn: Color(0xFFFFEA00), btnTexto: Color(0xFF000000),
   );
+}
+
+/// Notifica incluso a las pantallas const que leen la paleta del museo.
+class TemaMuseoActivo extends InheritedWidget {
+  const TemaMuseoActivo({super.key, required this.modo, required super.child});
+  final String modo;
+
+  static void observar(BuildContext context) {
+    context.dependOnInheritedWidgetOfExactType<TemaMuseoActivo>();
+  }
+
+  @override
+  bool updateShouldNotify(TemaMuseoActivo anterior) => modo != anterior.modo;
 }

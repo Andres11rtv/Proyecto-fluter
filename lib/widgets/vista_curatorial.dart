@@ -128,6 +128,7 @@ class _FichaState extends State<_Ficha> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final compacta = MediaQuery.sizeOf(context).width < 700;
     return BackdropFilter(filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4), child: Dialog(
       backgroundColor: AppTheme.surface, insetPadding: const EdgeInsets.all(20),

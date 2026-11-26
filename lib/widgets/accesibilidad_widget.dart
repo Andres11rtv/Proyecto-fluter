@@ -7,7 +7,7 @@ class AccesibilidadMuseo {
   static final ValueNotifier<bool> lecturaAmplia = ValueNotifier<bool>(false);
 
   static void cambiarEscala(double valor) {
-    escalaTexto.value = valor.clamp(0.85, 1.35).toDouble();
+    escalaTexto.value = valor.clamp(0.85, 2.0).toDouble();
   }
 
   static void cambiarModo(String nuevoModo) {
@@ -56,6 +56,7 @@ class _MuseoAccesibilidadWidgetState extends State<MuseoAccesibilidadWidget> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Material(
       color: Colors.transparent,
       child: Column(

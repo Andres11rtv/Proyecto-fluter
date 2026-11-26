@@ -70,6 +70,7 @@ class _GaleriaPortadaState extends State<GaleriaPortada> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
       Text('CURADURÍA DESTACADA', style: AppTheme.sans(size: 11, letterSpacing: 2.5, color: AppTheme.bronze)),
       Wrap(alignment: WrapAlignment.spaceBetween, crossAxisAlignment: WrapCrossAlignment.center,

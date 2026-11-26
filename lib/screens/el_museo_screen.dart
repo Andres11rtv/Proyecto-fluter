@@ -18,6 +18,7 @@ class _ElMuseoScreenState extends State<ElMuseoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Scaffold(
       appBar: AppBar(title: const Text('El museo')),
       body: MuseoBackdrop(

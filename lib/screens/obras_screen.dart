@@ -1,3 +1,4 @@
+import '../widgets/selector_museo.dart';
 import '../rutas_museo.dart';
 import '../widgets/imagen_obra.dart';
 import 'historial_general_screen.dart';
@@ -125,6 +126,7 @@ class _ObrasScreenState extends State<ObrasScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Scaffold(
       body: MuseoBackdrop(
         child: SafeArea(
@@ -286,7 +288,7 @@ class _ObrasScreenState extends State<ObrasScreen> {
         ),
         SizedBox(
           width: 180,
-          child: DropdownButtonFormField<int?>(
+          child: selectorMuseo<int?>(
             isExpanded: true,
             initialValue: _filtroCategoria,
             decoration: const InputDecoration(
@@ -307,7 +309,7 @@ class _ObrasScreenState extends State<ObrasScreen> {
         ),
         SizedBox(
           width: 180,
-          child: DropdownButtonFormField<int?>(
+          child: selectorMuseo<int?>(
             isExpanded: true,
             initialValue: _filtroArtista,
             decoration: const InputDecoration(
@@ -328,7 +330,7 @@ class _ObrasScreenState extends State<ObrasScreen> {
         ),
         SizedBox(
           width: 170,
-          child: DropdownButtonFormField<int?>(
+          child: selectorMuseo<int?>(
             isExpanded: true,
             initialValue: _filtroSala,
             decoration: const InputDecoration(

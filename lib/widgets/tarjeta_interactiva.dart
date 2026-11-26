@@ -14,6 +14,7 @@ class _TarjetaInteractivaState extends State<TarjetaInteractiva> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final reducir = MediaQuery.disableAnimationsOf(context);
     return MouseRegion(
       onEnter: (_) => setState(() => encima = true),

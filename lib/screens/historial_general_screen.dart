@@ -1,3 +1,4 @@
+import '../widgets/selector_museo.dart';
 import 'package:flutter/material.dart';
 import '../services/eliminacion_service.dart';
 import '../widgets/papelera_registro.dart';
@@ -34,7 +35,7 @@ class _HistorialGeneralScreenState extends State<HistorialGeneralScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Text(titulo, style: Theme.of(context).textTheme.labelLarge),
         const SizedBox(height: 6),
-        Semantics(label: titulo, child: DropdownButtonFormField<int>(
+        Semantics(label: titulo, child: selectorMuseo<int>(
       initialValue: id, isExpanded: true, decoration: const InputDecoration(),
       items: [const DropdownMenuItem<int>(child: Text('Todas')),
         for (final e in items.entries) DropdownMenuItem(value: e.key,

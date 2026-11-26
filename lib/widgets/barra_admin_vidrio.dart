@@ -19,6 +19,7 @@ class BarraAdminVidrio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final actual = items.firstWhere((i) => i.id == activeId);
     final ancho = (MediaQuery.sizeOf(context).width - 48).clamp(0.0, 320.0).toDouble();
     return VidrioPortada(radio: 32, child: Padding(

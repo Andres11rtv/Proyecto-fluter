@@ -1,3 +1,4 @@
+import '../widgets/selector_museo.dart';
 import 'package:flutter/material.dart';
 import '../widgets/vidrio_portada.dart';
 import '../theme/app_theme.dart';
@@ -72,7 +73,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
     final opciones = c.opciones;
     const decoracion = InputDecoration();
     if (opciones != null) {
-      return DropdownButtonFormField<int>(
+      return selectorMuseo<int>(
         decoration: decoracion,
         isExpanded: true,
         items: [
@@ -99,6 +100,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     Widget campos(List<CampoRegistro> lista) => Column(children: [
       for (final c in lista)
         Padding(

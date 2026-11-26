@@ -56,6 +56,7 @@ class AdminShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Scaffold(
       body: MuseoBackdrop(
         child: SafeArea(
@@ -122,6 +123,7 @@ class AdminHead extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final texto = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -184,6 +186,7 @@ class AdminBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Container(
       width: 340,
       height: 130,
@@ -243,6 +246,7 @@ child: Row(
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         final tarjetas = datos.map(_tarjeta).toList();
@@ -275,6 +279,7 @@ class AdminPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return VidrioPortada(
       child: Padding(padding: const EdgeInsets.all(22), child: child),
     );
@@ -295,6 +300,7 @@ class AdminBuscador extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return SizedBox(
       width: 300,
       child: TextField(
@@ -344,6 +350,7 @@ class AdminTabla extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return VidrioPortada(radio: 18,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -385,6 +392,7 @@ class AdminVacio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return Container(
       height: 190,
       width: double.infinity,
@@ -597,6 +605,7 @@ class _AdminListPageState<T> extends State<AdminListPage<T>> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     Widget? extra;
     if (widget.bannerUrl != null && widget.activeId != 'categorias' && widget.activeId != 'recorridos') {
       extra = AdminBanner(url: widget.bannerUrl!);

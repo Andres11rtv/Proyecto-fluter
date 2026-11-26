@@ -25,6 +25,7 @@ class ObraDetalleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final ArtistaService artistaServicio = ArtistaServiceImpl();
     final CategoriaService categoriaServicio = CategoriaServiceImpl();
     final SalaService salaServicio = SalaServiceImpl();

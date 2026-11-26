@@ -100,6 +100,7 @@ class _HistorialScreenState extends State<HistorialScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final obra = widget.obra;
     final panel = VidrioPortada(
       child: Padding(

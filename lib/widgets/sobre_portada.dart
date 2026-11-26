@@ -123,6 +123,7 @@ class SobrePortada extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return VidrioPortada(
       radio: 32,
       child: Padding(

@@ -75,6 +75,7 @@ class ImagenObra extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     final local = fotosDestacadas[nombre.trim().toLowerCase()];
     Widget alternativa() {
       if (local == null) return reserva();

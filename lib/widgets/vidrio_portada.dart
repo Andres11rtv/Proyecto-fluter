@@ -11,6 +11,19 @@ class VidrioPortada extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
+    return Stack(fit: StackFit.passthrough, children: [
+      Positioned.fill(child: AppTheme.modo == 'light'
+          ? _vidrioOriginal(context, const SizedBox.expand())
+          : DecoratedBox(decoration: BoxDecoration(
+              color: oscuro ? AppTheme.btn : AppTheme.surface,
+              borderRadius: BorderRadius.circular(radio),
+              border: Border.all(color: AppTheme.line)))),
+      ClipRRect(borderRadius: BorderRadius.circular(radio), child: child),
+    ]);
+  }
+
+  Widget _vidrioOriginal(BuildContext context, Widget child) {
     final contraste = AppTheme.modo == 'contrast';
     final base = oscuro ? AppTheme.btn : AppTheme.surface;
     final borde = BorderRadius.circular(radio);

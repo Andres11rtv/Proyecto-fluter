@@ -76,7 +76,7 @@ class _PortadaColeccionState extends State<PortadaColeccion> {
   Widget flecha(String etiqueta, IconData icono, VoidCallback accion) {
     return IconButton.outlined(
       tooltip: etiqueta, onPressed: accion, icon: Icon(icono, size: 16),
-      style: IconButton.styleFrom(minimumSize: const Size(32, 32), padding: EdgeInsets.zero,
+      style: IconButton.styleFrom(minimumSize: const Size(48, 48), padding: EdgeInsets.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap),
     );
   }
@@ -149,6 +149,7 @@ class _PortadaColeccionState extends State<PortadaColeccion> {
 
   @override
   Widget build(BuildContext context) {
+    TemaMuseoActivo.observar(context);
     return FutureBuilder<List<Obra>>(future: widget.obras, builder: (context, datos) {
       final tarjetas = <Widget>[
         MouseRegion(onEnter: (_) { cursorEnTarjeta = true; sincronizarReloj(); },
